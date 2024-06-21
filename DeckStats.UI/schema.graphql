@@ -1,0 +1,14 @@
+schema {
+  query: Query
+}
+
+type Query {
+  deck: Deck!
+}
+
+type Deck {
+  id: Int!
+  name: String!
+  wins: Int!
+  losses: Int!
+}

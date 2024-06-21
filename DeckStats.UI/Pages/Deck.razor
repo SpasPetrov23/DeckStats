@@ -1,0 +1,23 @@
+﻿@page "/deck"
+@inject HttpClient Http
+
+<PageTitle>Deck</PageTitle>
+
+<h1>Deck</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<UseGetDecks Context="result">
+    <ChildContent>
+        <ul>
+            @result.Deck.Name
+        </ul>
+    </ChildContent>
+    <ErrorContent>
+        Something went wrong ...<br />
+        @result.First().Message
+    </ErrorContent>
+    <LoadingContent>
+        Loading ...
+    </LoadingContent>
+</UseGetDecks>

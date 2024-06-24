@@ -1,6 +1,21 @@
+using DeckStats.Data.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace DeckStats.Data;
 
-public class DeckStatsDbContext
+public class DeckStatsDbContext : DbContext
 {
+    public DeckStatsDbContext() { }
+    public DeckStatsDbContext(DbContextOptions<DeckStatsDbContext> options) : base(options) { }
     
+
+    public DbSet<Deck> Decks { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+    }
 }

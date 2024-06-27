@@ -1,4 +1,6 @@
 using DeckStats.API.GraphQL;
+using DeckStats.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddDbContext<DeckStatsDbContext>(opts => opts.UseInMemoryDatabase("DeckStatsDb"));
 builder.Services.AddGraphQLServer()
+    .ModifyRequestOptions(x => x.IncludeExceptionDetails = true)
     .AddQueryType<Query>();
 // builder.Services.AddSwaggerGen();
 
@@ -24,6 +28,12 @@ var app = builder.Build();
 //     app.UseSwagger();
 //     app.UseSwaggerUI();
 // }
+
+using (IServiceScope serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+{
+    DeckStatsDbContext context = serviceScope.ServiceProvider.GetRequiredService<DeckStatsDbContext>();
+    context.Database.EnsureCreated();
+}
 
 app.MapGraphQL();
 

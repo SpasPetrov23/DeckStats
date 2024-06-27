@@ -3,12 +3,20 @@ schema {
 }
 
 type Query {
-  deck: Deck!
+  decks: [DeckDto!]!
 }
 
-type Deck {
-  id: Int!
+type DeckDto {
   name: String!
   wins: Int!
   losses: Int!
+  winRatio: Decimal!
+  points: Decimal!
+  tier: String!
+  subjectiveTier: String!
+  imageUrl: String!
+  mostPlayedByPlayerId: Int!
 }
+
+"The built-in `Decimal` scalar type."
+scalar Decimal

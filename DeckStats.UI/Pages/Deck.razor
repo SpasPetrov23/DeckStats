@@ -7,11 +7,14 @@
 
 <UseGetDecks Context="result">
     <ChildContent>
-        <ul>
-            <li>Name: @result.Deck.Name</li>
-            <li>Wins: @result.Deck.Wins</li>
-            <li>Losses: @result.Deck.Losses</li>
-        </ul>
+        @foreach (var deck in result.Decks)
+        {
+            <ul>
+                <li>Name: @deck.Name</li>
+                <li>Wins: @deck.Wins</li>
+                <li>Losses: @deck.Losses</li>
+            </ul>
+        }
     </ChildContent>
     <ErrorContent>
         Something went wrong ...<br />

@@ -1,4 +1,5 @@
 using DeckStats.Data.Models;
+using DeckStats.Data.StaticData;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeckStats.Data;
@@ -13,9 +14,13 @@ public class DeckStatsDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        optionsBuilder.UseInMemoryDatabase("DeckStatsDb");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.Entity<Deck>().HasData(DeckStaticData.GetDeckStaticData());
     }
 }

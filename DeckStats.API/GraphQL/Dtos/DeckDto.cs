@@ -1,4 +1,4 @@
-namespace DeckStats.API.GraphQL.Types;
+namespace DeckStats.API.GraphQL.Dtos;
 
 public class DeckDto
 {

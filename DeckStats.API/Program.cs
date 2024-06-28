@@ -1,4 +1,5 @@
 using DeckStats.API.GraphQL;
+using DeckStats.API.GraphQL.Handlers;
 using DeckStats.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 builder.Services.AddDbContext<DeckStatsDbContext>(opts => opts.UseInMemoryDatabase("DeckStatsDb"));
 builder.Services.AddGraphQLServer()
     .ModifyRequestOptions(x => x.IncludeExceptionDetails = true)
-    .AddQueryType<Query>();
+    .AddQueryType<Queries>();
 // builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
@@ -29,20 +31,15 @@ var app = builder.Build();
 //     app.UseSwaggerUI();
 // }
 
+app.MapGraphQL();
+app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
+app.UseCors("all");
 using (IServiceScope serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
 {
     DeckStatsDbContext context = serviceScope.ServiceProvider.GetRequiredService<DeckStatsDbContext>();
     context.Database.EnsureCreated();
 }
-
-app.MapGraphQL();
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.UseCors("all");
 
 app.Run();

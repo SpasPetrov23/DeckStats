@@ -1,5 +1,5 @@
-using DeckStats.API.GraphQL;
 using DeckStats.API.GraphQL.Handlers;
+using DeckStats.API.Services;
 using DeckStats.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -48,12 +48,15 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+builder.Services.AddScoped<AccountService>();
+
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 builder.Services.AddDbContext<DeckStatsDbContext>(opts => opts.UseInMemoryDatabase("DeckStatsDb"));
 builder.Services.AddGraphQLServer()
     .ModifyRequestOptions(x => x.IncludeExceptionDetails = true)
-    .AddQueryType<Queries>();
-// builder.Services.AddSwaggerGen();
+    .AddQueryType<Queries>()
+    .AddMutationType<Mutations>();
 
 builder.Services.AddCors(options =>
 {

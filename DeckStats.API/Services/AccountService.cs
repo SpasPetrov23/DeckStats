@@ -2,6 +2,7 @@ using DeckStats.API.Controllers.Dtos;
 using DeckStats.API.Utils;
 using DeckStats.Data;
 using DeckStats.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeckStats.API.Services;
 
@@ -9,29 +10,27 @@ public class AccountService
 {
     private readonly IConfiguration _config;
     private readonly TokenProvider _tokenProvider;
-    private readonly EncryptionHelper _encryptionHelper;
     private readonly DeckStatsDbContext _dbContext;
 
-    public AccountService(IConfiguration config, EncryptionHelper encryptionHelper, DeckStatsDbContext dbContext)
+    public AccountService(IConfiguration config, DeckStatsDbContext dbContext)
     {
         _config = config;
         _tokenProvider = new(_config, _dbContext);
-        _encryptionHelper = encryptionHelper;
         _dbContext = dbContext;
     }
     
-    public string Login(UserLoginRequest userLoginInfo)
+    public async Task<string> Login(UserLoginRequest userLoginInfo)
     {
-        User user = Authenticate(userLoginInfo.Email, userLoginInfo.Password);
+        User user = await Authenticate(userLoginInfo.Email, userLoginInfo.Password);
         
         string jwtToken = _tokenProvider.GenerateJwtToken(user);
 
         return jwtToken;
     }
     
-    private User Authenticate(string email, string password)
+    private async Task<User> Authenticate(string email, string password)
     {
-        User? user = _dbContext.Users.FirstOrDefault(x => x.Email == email);
+        User? user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);
         
         if (user is null)
         {
@@ -39,7 +38,7 @@ public class AccountService
             throw new Exception();
         }
 
-        string hashedPasswordAndSalt = _encryptionHelper.GetHashedPasswordAndSalt(password, user.Salt);
+        string hashedPasswordAndSalt = PasswordService.GetHashedPasswordAndSalt(password, user.Salt);
 
         if (hashedPasswordAndSalt != user.Password)
         {

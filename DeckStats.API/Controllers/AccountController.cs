@@ -18,9 +18,9 @@ public class AccountController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost]
-    public string Login([FromBody] UserLoginRequest request)
+    public async Task<string> Login([FromBody] UserLoginRequest request)
     {
-        string token = _accountService.Login(request);
+        string token = await _accountService.Login(request);
 
         return token;
     }

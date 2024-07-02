@@ -23,5 +23,6 @@ public class DeckStatsDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         
         modelBuilder.Entity<Deck>().HasData(DeckStaticData.GetDeckStaticData());
+        modelBuilder.Entity<User>().HasData(UserStaticData.GetUserStaticData());
     }
 }

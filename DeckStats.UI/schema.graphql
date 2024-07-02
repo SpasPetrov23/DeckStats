@@ -1,8 +1,8 @@
 schema {
-  query: Query
+  query: Queries
 }
 
-type Query {
+type Queries {
   decks: [DeckDto!]!
 }
 

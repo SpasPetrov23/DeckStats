@@ -11,6 +11,7 @@ public class DeckStatsDbContext : DbContext
     
 
     public DbSet<Deck> Decks { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

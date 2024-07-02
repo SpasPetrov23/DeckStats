@@ -29,7 +29,7 @@ public class GetDecks
                 Name = x.Name,
                 Wins = x.Wins,
                 Losses = x.Losses
-            }).ToListAsync();
+            }).ToListAsync(cancellationToken: cancellationToken);
             
             return new(decks);
         }

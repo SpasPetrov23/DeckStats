@@ -5,7 +5,7 @@ using DeckStats.Data;
 using DeckStats.Data.Models;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DeckStats.API.Utils;
+namespace DeckStats.API.Utils.Authentication;
 
 public class TokenProvider
 {

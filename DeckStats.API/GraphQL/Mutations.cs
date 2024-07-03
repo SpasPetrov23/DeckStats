@@ -1,9 +1,9 @@
-using DeckStats.API.GraphQL.Handlers.UserHandlers;
-using DeckStats.API.GraphQL.Handlers.UserHandlers.Inputs;
+using DeckStats.API.GraphQL.Inputs;
+using DeckStats.API.Handlers.UserHandlers;
 using DeckStats.Data.Models;
 using MediatR;
 
-namespace DeckStats.API.GraphQL.Handlers;
+namespace DeckStats.API.GraphQL;
 
 public class Mutations
 {

@@ -1,9 +1,9 @@
-using DeckStats.API.GraphQL.Handlers.DeckHandlers.Dtos;
+using DeckStats.API.Handlers.DeckHandlers.Dtos;
 using DeckStats.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace DeckStats.API.GraphQL.Handlers.DeckHandlers;
+namespace DeckStats.API.Handlers.DeckHandlers;
 
 public class GetDecks
 {

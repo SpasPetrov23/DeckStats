@@ -1,9 +1,9 @@
-using DeckStats.API.Utils;
+using DeckStats.API.Utils.Authentication;
 using DeckStats.Data;
 using DeckStats.Data.Models;
 using MediatR;
 
-namespace DeckStats.API.GraphQL.Handlers.UserHandlers;
+namespace DeckStats.API.Handlers.UserHandlers;
 
 public class Register
 {

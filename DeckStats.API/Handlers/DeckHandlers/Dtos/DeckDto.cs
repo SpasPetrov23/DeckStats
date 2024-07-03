@@ -1,4 +1,4 @@
-namespace DeckStats.API.GraphQL.Handlers.DeckHandlers.Dtos;
+namespace DeckStats.API.Handlers.DeckHandlers.Dtos;
 
 public class DeckDto
 {

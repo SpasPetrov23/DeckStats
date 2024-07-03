@@ -1,15 +1,12 @@
-using DeckStats.API.GraphQL.Handlers;
-using DeckStats.API.Services;
+using DeckStats.API.GraphQL;
+using DeckStats.API.Utils.ExceptionHandling;
 using DeckStats.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -49,14 +46,14 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddScoped<AccountService>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 builder.Services.AddDbContext<DeckStatsDbContext>(opts => opts.UseInMemoryDatabase("DeckStatsDb"));
 builder.Services.AddGraphQLServer()
     .ModifyRequestOptions(x => x.IncludeExceptionDetails = true)
     .AddQueryType<Queries>()
-    .AddMutationType<Mutations>();
+    .AddMutationType<Mutations>()
+    .AddErrorFilter<GraphQLErrorFilter>();
 
 builder.Services.AddCors(options =>
 {
@@ -65,7 +62,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-//Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -82,5 +78,7 @@ using (IServiceScope serviceScope = app.Services.GetService<IServiceScopeFactory
     DeckStatsDbContext context = serviceScope.ServiceProvider.GetRequiredService<DeckStatsDbContext>();
     context.Database.EnsureCreated();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.Run();

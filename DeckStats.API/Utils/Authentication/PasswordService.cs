@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using DeckStats.Data.Models;
 
-namespace DeckStats.API.Utils;
+namespace DeckStats.API.Utils.Authentication;
 
 public class PasswordService
 {

@@ -1,8 +1,8 @@
-using DeckStats.API.GraphQL.Handlers.DeckHandlers;
-using DeckStats.API.GraphQL.Handlers.DeckHandlers.Dtos;
+using DeckStats.API.Handlers.DeckHandlers;
+using DeckStats.API.Handlers.DeckHandlers.Dtos;
 using MediatR;
 
-namespace DeckStats.API.GraphQL.Handlers;
+namespace DeckStats.API.GraphQL;
 
 public class Queries
 {

@@ -15,15 +15,14 @@ public class PasswordService
         }
     }
     
-    public static User EncryptPassword(User user)
+    public static void EncryptPassword(User user)
     {
         user.Salt = GenerateSalt();
         string hashedPasswordAndSalt = GetHashedPasswordAndSalt(user.Password, user.Salt);
         user.Password = hashedPasswordAndSalt;
-        return user;
     }
     
-    public static string GenerateSalt()
+    private static string GenerateSalt()
     {
         byte[] salt = new byte[8];
         using (RandomNumberGenerator random = RandomNumberGenerator.Create())

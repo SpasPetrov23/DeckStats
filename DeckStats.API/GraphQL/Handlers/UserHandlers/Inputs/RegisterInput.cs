@@ -1,4 +1,4 @@
-namespace DeckStats.API.GraphQL.Dtos;
+namespace DeckStats.API.GraphQL.Handlers.UserHandlers.Inputs;
 
 public class RegisterInput
 {

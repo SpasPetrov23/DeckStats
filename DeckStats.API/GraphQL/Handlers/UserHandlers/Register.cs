@@ -3,7 +3,7 @@ using DeckStats.Data;
 using DeckStats.Data.Models;
 using MediatR;
 
-namespace DeckStats.API.GraphQL.Handlers.Users;
+namespace DeckStats.API.GraphQL.Handlers.UserHandlers;
 
 public class Register
 {
@@ -22,7 +22,7 @@ public class Register
 
         public Handler(DeckStatsDbContext dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<Result> Handle(Mutation request, CancellationToken cancellationToken)

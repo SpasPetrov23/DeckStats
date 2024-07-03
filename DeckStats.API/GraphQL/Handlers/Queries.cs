@@ -1,5 +1,5 @@
-using DeckStats.API.GraphQL.Dtos;
 using DeckStats.API.GraphQL.Handlers.DeckHandlers;
+using DeckStats.API.GraphQL.Handlers.DeckHandlers.Dtos;
 using MediatR;
 
 namespace DeckStats.API.GraphQL.Handlers;

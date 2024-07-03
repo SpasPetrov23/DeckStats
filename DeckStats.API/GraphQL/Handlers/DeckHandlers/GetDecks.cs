@@ -1,4 +1,4 @@
-using DeckStats.API.GraphQL.Dtos;
+using DeckStats.API.GraphQL.Handlers.DeckHandlers.Dtos;
 using DeckStats.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace DeckStats.API.Utils.ExceptionHandling;
 
 public class GraphQLErrorFilter : IErrorFilter
@@ -5,7 +7,8 @@ public class GraphQLErrorFilter : IErrorFilter
     public IError OnError(IError error)
     {
         Console.WriteLine(error.Message);
-        Console.WriteLine(error.Exception);
+        Console.WriteLine(error.Path);
+        Console.WriteLine(error.Exception?.ToString() ?? error.Extensions?.ToJson());
         
         if (error.Exception is AppException appException)
         {
@@ -15,17 +18,13 @@ public class GraphQLErrorFilter : IErrorFilter
                 .WithCode(appException.Message);
         }
 
-        if (error.Exception != null)
+        if (error.Exception is DbUpdateException db)
         {
-            Console.WriteLine(error.Exception.InnerException?.Message ?? ErrorCodes.INTERNAL_SERVER_ERROR.ToString());
-        
             return error
-                .WithException(error.Exception.InnerException)
-                .WithMessage(error.Exception.InnerException?.Message ?? ErrorCodes.INTERNAL_SERVER_ERROR.ToString())
+                .WithException(db.InnerException)
+                .WithMessage(db.InnerException?.Message ?? ErrorCodes.INTERNAL_SERVER_ERROR.ToString())
                 .WithCode(ErrorCodes.INTERNAL_SERVER_ERROR.ToString());
         }
-
-        //TODO: DbException?
 
         return error
             .WithMessage(error.Message)

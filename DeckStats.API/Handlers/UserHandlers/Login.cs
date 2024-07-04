@@ -44,8 +44,7 @@ public class Login
         
             if (user is null)
             {
-                //TODO: new syntax
-                throw new AppException(ErrorCodes.INVALID_EMAIL_ADDRESS, new(){email});
+                throw new AppException(ErrorCodes.INCORRECT_EMAIL_ADDRESS, [email]);
             }
 
             string hashedPasswordAndSalt = PasswordService.GetHashedPasswordAndSalt(password, user.Salt);

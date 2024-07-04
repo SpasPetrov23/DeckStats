@@ -1,6 +1,8 @@
+using AppAny.HotChocolate.FluentValidation;
 using DeckStats.API.GraphQL;
 using DeckStats.API.Utils.ExceptionHandling;
 using DeckStats.Data;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -47,12 +49,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 builder.Services.AddDbContext<DeckStatsDbContext>(opts => opts.UseInMemoryDatabase("DeckStatsDb"));
 builder.Services.AddGraphQLServer()
     .ModifyRequestOptions(x => x.IncludeExceptionDetails = true)
     .AddQueryType<Queries>()
     .AddMutationType<Mutations>()
+    .AddFluentValidation(options => options.UseDefaultErrorMapperWithExtendedDetails())
     .AddErrorFilter<GraphQLErrorFilter>();
 
 builder.Services.AddCors(options =>

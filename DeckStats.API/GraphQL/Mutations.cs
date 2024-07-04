@@ -1,3 +1,4 @@
+using AppAny.HotChocolate.FluentValidation;
 using DeckStats.API.GraphQL.Inputs;
 using DeckStats.API.Handlers.UserHandlers;
 using DeckStats.Data.Models;
@@ -7,8 +8,7 @@ namespace DeckStats.API.GraphQL;
 
 public class Mutations
 {
-    //TODO: Fluent Validation
-    public async Task<User> Register([Service] ISender mediator, RegisterInput input)
+    public async Task<User> Register([Service] ISender mediator, [UseFluentValidation] RegisterInput input)
     {
         Register.Mutation mutation = new()
         {
@@ -19,6 +19,5 @@ public class Mutations
         Register.Result result = await mediator.Send(mutation);
 
         return result.User;
-        //test
     }
 }

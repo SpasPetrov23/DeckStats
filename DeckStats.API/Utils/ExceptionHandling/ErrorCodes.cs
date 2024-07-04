@@ -3,6 +3,16 @@ namespace DeckStats.API.Utils.ExceptionHandling;
 public enum ErrorCodes
 {
     INTERNAL_SERVER_ERROR,
+    NOT_EMPTY_FIELD,
+    
+    // Fluent Validation
+    USERNAME_MAX_LENGTH,
+    USERNAME_MIN_LENGTH,
     INVALID_EMAIL_ADDRESS,
+    PASSWORD_MUST_MATCH_NUMBER,
+    PASSWORD_MUST_MATCH_LOWER_CASE,
+    PASSWORD_MINIMUM_LENGHT,
+    
+    INCORRECT_EMAIL_ADDRESS,
     INVALID_PASSWORD,
 }

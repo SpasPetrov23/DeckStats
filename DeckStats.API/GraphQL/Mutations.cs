@@ -19,5 +19,6 @@ public class Mutations
         Register.Result result = await mediator.Send(mutation);
 
         return result.User;
+        //test
     }
 }

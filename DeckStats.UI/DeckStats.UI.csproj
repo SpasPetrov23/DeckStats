@@ -9,11 +9,12 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.6" PrivateAssets="all"/>
+        <PackageReference Include="Radzen.Blazor" Version="4.33.3" />
         <PackageReference Include="StrawberryShake.Blazor" Version="13.9.6" />
     </ItemGroup>
 
     <ItemGroup>
-      <GraphQL Update="Queries\GetDecks.graphql">
+      <GraphQL Update="GraphQL\Queries\GetDecks.graphql">
         <Generator>MSBuild:GenerateGraphQLCode</Generator>
       </GraphQL>
     </ItemGroup>

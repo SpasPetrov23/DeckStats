@@ -1,9 +1,28 @@
 schema {
   query: Queries
+  mutation: Mutations
 }
 
 type Queries {
   decks: [DeckDto!]!
+}
+
+type Mutations {
+  register(input: RegisterInput!): User!
+}
+
+input RegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+type User {
+  id: Int!
+  username: String!
+  email: String!
+  password: String!
+  salt: String!
 }
 
 type DeckDto {

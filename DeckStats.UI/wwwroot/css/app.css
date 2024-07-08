@@ -1,5 +1,7 @@
+@import url(//fonts.googleapis.com/css?family=Exo);
+
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Exo', Helvetica, Arial, sans-serif;
 }
 
 h1:focus {

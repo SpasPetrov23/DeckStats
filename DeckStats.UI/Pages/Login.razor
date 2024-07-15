@@ -1,4 +1,5 @@
 @page "/login"
+@inject NavigationManager NavManager
 
 <RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 600px;">
   <RadzenTemplateForm Data=@("LoginWithDefaultValues")>
@@ -20,8 +21,9 @@
     Console.WriteLine($"{name} -> Username: {args.Username}, password: {args.Password}, remember me: {args.RememberMe}");
   }
 
-  void OnRegister(string name)
+  async Task OnRegister(string name)
   {
+    NavManager.NavigateTo("/register");
     Console.WriteLine($"{name} -> Register");
   }
 

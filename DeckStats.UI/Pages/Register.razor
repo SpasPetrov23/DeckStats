@@ -1,0 +1,53 @@
+@page "/register"
+@inject DeckStatsClient Client
+@inject NavigationManager NavManager
+
+<RadzenStack Orientation="Orientation.Vertical" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center" Wrap="FlexWrap.Wrap" Gap="1rem" Class="rz-p-sm-12">
+  <RadzenFormField Text="Username" Variant="Variant.Outlined">
+    <Start>
+      <RadzenIcon Icon="face" />
+    </Start>
+    <ChildContent>
+      <RadzenTextBox @bind-Value="@registerInput.Username" size=@size />
+    </ChildContent>
+  </RadzenFormField>
+  <RadzenFormField Text="Email" Variant="Variant.Outlined">
+    <Start>
+      <RadzenIcon Icon="account_circle" />
+    </Start>
+    <ChildContent>
+      <RadzenTextBox @bind-Value="@registerInput.Email" size=@size/>
+    </ChildContent>
+  </RadzenFormField>
+  <RadzenFormField Text="Password" Variant="Variant.Outlined">
+    <ChildContent>
+      <RadzenTextBox @bind-Value="@registerInput.Password" Visible="@(!password)" size=@size/>
+      <RadzenPassword @bind-Value="@registerInput.Password" Visible="@password" size=@size/>
+    </ChildContent>
+    <End>
+      <RadzenButton Icon="@(password ? "visibility" : "visibility_off")" Click="TogglePassword" Variant="Variant.Text" Size="ButtonSize.Small"/>
+    </End>
+  </RadzenFormField>
+  
+  <RadzenButton Click=@(args => OnRegister()) Text="Register" ButtonStyle="ButtonStyle.Light"/>
+</RadzenStack>
+
+@code
+{
+  private readonly RegisterInput registerInput = new();
+  int size = 35;
+  bool password = true;
+
+  void TogglePassword()
+  {
+    password = !password;
+  }
+  
+  async Task OnRegister()
+  {
+    await Client.Register.ExecuteAsync(registerInput);
+    NavManager.NavigateTo("/");
+    
+    //TODO: OnError?
+  }
+}

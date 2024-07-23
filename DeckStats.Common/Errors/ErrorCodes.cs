@@ -1,4 +1,4 @@
-namespace DeckStats.API.Utils.ExceptionHandling;
+namespace DeckStats.Common.Errors;
 
 public enum ErrorCodes
 {

@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeckStats.Data", "DeckStats
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeckStats.UI", "DeckStats.UI\DeckStats.UI.csproj", "{FE2989DE-C913-470E-837C-0EFF03B429BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeckStats.Common", "DeckStats.Common\DeckStats.Common.csproj", "{F9BA252E-4BE6-47BD-B36A-05E686BE860C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{FE2989DE-C913-470E-837C-0EFF03B429BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE2989DE-C913-470E-837C-0EFF03B429BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE2989DE-C913-470E-837C-0EFF03B429BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9BA252E-4BE6-47BD-B36A-05E686BE860C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BA252E-4BE6-47BD-B36A-05E686BE860C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9BA252E-4BE6-47BD-B36A-05E686BE860C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9BA252E-4BE6-47BD-B36A-05E686BE860C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

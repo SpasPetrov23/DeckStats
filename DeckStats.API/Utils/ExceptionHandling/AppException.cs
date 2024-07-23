@@ -1,3 +1,5 @@
+using ErrorCodes = DeckStats.Common.Errors.ErrorCodes;
+
 namespace DeckStats.API.Utils.ExceptionHandling;
 
 public class AppException : Exception

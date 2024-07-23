@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ErrorCodes = DeckStats.Common.Errors.ErrorCodes;
 
 namespace DeckStats.API.Utils.ExceptionHandling;
 

@@ -1,4 +1,5 @@
 using System.Net;
+using DeckStats.Common.Errors;
 
 namespace DeckStats.API.Utils.ExceptionHandling;
 

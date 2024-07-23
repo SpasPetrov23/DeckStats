@@ -1,6 +1,6 @@
-using DeckStats.API.Handlers.UserHandlers.Dtos;
+using DeckStats.Common.Dtos;
 using FluentValidation;
-using ErrorCodes = DeckStats.API.Utils.ExceptionHandling.ErrorCodes;
+using ErrorCodes = DeckStats.Common.Errors.ErrorCodes;
 
 namespace DeckStats.API.Controllers.Dtos.Validators;
 

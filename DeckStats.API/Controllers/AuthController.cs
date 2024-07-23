@@ -1,5 +1,5 @@
 using DeckStats.API.Handlers.UserHandlers;
-using DeckStats.API.Handlers.UserHandlers.Dtos;
+using DeckStats.Common.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

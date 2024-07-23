@@ -46,7 +46,7 @@
   async Task OnRegister()
   {
     await Client.Register.ExecuteAsync(registerInput);
-    NavManager.NavigateTo("/");
+    NavManager.NavigateTo("/login");
     
     //TODO: OnError?
   }

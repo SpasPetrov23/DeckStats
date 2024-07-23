@@ -1,5 +1,5 @@
 using FluentValidation;
-using ErrorCodes = DeckStats.API.Utils.ExceptionHandling.ErrorCodes;
+using ErrorCodes = DeckStats.Common.Errors.ErrorCodes;
 
 namespace DeckStats.API.GraphQL.Inputs.Validators;
 

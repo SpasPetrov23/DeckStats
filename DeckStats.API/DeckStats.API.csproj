@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DeckStats.Common\DeckStats.Common.csproj" />
       <ProjectReference Include="..\DeckStats.Data\DeckStats.Data.csproj" />
     </ItemGroup>
 

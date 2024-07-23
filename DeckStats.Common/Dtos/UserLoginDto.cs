@@ -1,4 +1,4 @@
-namespace DeckStats.API.Handlers.UserHandlers.Dtos;
+namespace DeckStats.Common.Dtos;
 
 public class UserLoginDto
 {

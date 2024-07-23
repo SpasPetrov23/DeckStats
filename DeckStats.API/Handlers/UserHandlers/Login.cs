@@ -4,7 +4,7 @@ using DeckStats.Data;
 using DeckStats.Data.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ErrorCodes = DeckStats.API.Utils.ExceptionHandling.ErrorCodes;
+using ErrorCodes = DeckStats.Common.Errors.ErrorCodes;
 
 namespace DeckStats.API.Handlers.UserHandlers;
 

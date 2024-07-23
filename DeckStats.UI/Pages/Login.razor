@@ -1,11 +1,21 @@
 @page "/login"
+@using System.Text.Json
+@using Blazored.LocalStorage
+@using DeckStats.Common.Dtos
+@using DeckStats.Common.Errors
+@using DeckStats.UI.Helpers
+@using Microsoft.AspNetCore.Components.Authorization
 @inject NavigationManager NavManager
+@inject AuthenticationStateProvider AuthStateProvider
+@inject ILocalStorageService LocalStorage
+@inject CommonHelper Helper
+@inject HttpClient Http
 
 <RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 600px;">
   <RadzenTemplateForm Data=@("LoginWithDefaultValues")>
     <RadzenLogin AllowRegister="true" AllowResetPassword="true" Username=@userName Password=@password
                  AllowRememberMe="true" RememberMe="@rememberMe"
-                 Login=@(args => OnLogin(args, "Login with default values"))
+                 Login=@(args => OnLogin(args))
                  ResetPassword=@(args => OnResetPassword(args, "Login with default values"))
                  Register=@(args => OnRegister("Login with default values")) />
   </RadzenTemplateForm>
@@ -16,9 +26,40 @@
   string password = "admin";
   bool rememberMe = true;
 
-  void OnLogin(LoginArgs args, string name)
+  async Task OnLogin(LoginArgs args)
   {
-    Console.WriteLine($"{name} -> Username: {args.Username}, password: {args.Password}, remember me: {args.RememberMe}");
+    var result = await Http.PostAsJsonAsync("/api/auth/login", new UserLoginDto()
+    {
+      //TODO: Logging with Email
+      Email = args.Username, 
+      Password = args.Password
+    });
+    
+    if (result.IsSuccessStatusCode)
+    {
+      var token = await result.Content.ReadAsStringAsync();
+      await LocalStorage.SetItemAsync("token", token);
+      await LocalStorage.SetItemAsync("refreshToken", token);
+
+      await AuthStateProvider.GetAuthenticationStateAsync();
+      NavManager.NavigateTo("/");
+    }
+    else
+    {
+      var error = await result.Content.ReadAsStringAsync();
+      var errorDetails = JsonSerializer.Deserialize<ErrorDetails>(error, new JsonSerializerOptions(){PropertyNameCaseInsensitive = true});
+      
+      switch (errorDetails?.Message)
+      {
+        case nameof(ErrorCodes.INCORRECT_EMAIL_ADDRESS):
+        case nameof(ErrorCodes.INVALID_PASSWORD):
+          Helper.NotifyError("Incorrect Email or Password.");
+          break;
+        default:
+          Helper.NotifyError("Internal Server Error.");
+          break;
+      }
+    }
   }
 
   async Task OnRegister(string name)

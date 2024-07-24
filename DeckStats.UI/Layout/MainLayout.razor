@@ -1,29 +1,69 @@
-﻿@inherits LayoutComponentBase
+﻿@using DeckStats.UI.Pages
+@inherits LayoutComponentBase
 <RadzenDialog/>
 <RadzenNotification/>
 <RadzenContextMenu/>
 <RadzenTooltip/>
-<div class="page">
-  <div class="sidebar">
-    <NavMenu/>
-  </div>
 
-  <main>
-    <div class="top-row px-4">
-      <NavLink class="nav-link" href="login">
-        <RadzenButton Click=@(args => OnClick()) Text="Login" ButtonStyle="ButtonStyle.Light"/>
-      </NavLink>
-    </div>
+<AuthorizeView>
+  <Authorized>
+    <RadzenLayout>
+      <RadzenHeader>
+        <div class="header-content">
+          <RadzenSidebarToggle Click="@(() => sidebarExpanded = !sidebarExpanded)"/>
+          <RadzenLabel Text="DeckStats"/>
+          <div class="header-spacer"></div>
+          <NavLink class="nav-link" href="login">
+            <RadzenButton Click="OnClick" Text="Login" ButtonStyle="ButtonStyle.Light"/>
+          </NavLink>
+        </div>
+      </RadzenHeader>
+      <RadzenSidebar Responsive="false" Style="width: max-content">
+        <RadzenPanelMenu DisplayStyle="@(sidebarExpanded ? MenuItemDisplayStyle.IconAndText : MenuItemDisplayStyle.Icon)" ShowArrow="false">
+          <RadzenPanelMenuItem Path="/" Text="Home" Icon="home"/>
+          <RadzenPanelMenuItem Path="/deck" Text="Inspect" Icon="query_stats"/>
+          <RadzenPanelMenuItem Path="/deck" Text="Total Stats" Icon="leaderboard"/>
+          <RadzenPanelMenuItem Path="/deck" Text="Match History" Icon="history"/>
+          <RadzenPanelMenuItem Path="/counter" Text="UI Fundamentals" Icon="auto_awesome">
+            <RadzenPanelMenuItem Text="Themes" Icon="color_lens"/>
+            <RadzenPanelMenuItem Text="Colors" Icon="invert_colors"/>
+          </RadzenPanelMenuItem>
+        </RadzenPanelMenu>
+      </RadzenSidebar>
+      <RadzenBody>
+        <div class="rz-p-4">
+          @Body
+        </div>
+      </RadzenBody>
+      <RadzenFooter>
+        Footer
+      </RadzenFooter>
+    </RadzenLayout>
+  </Authorized>
+  <NotAuthorized>
+    <Login/>
+  </NotAuthorized>
+</AuthorizeView>
 
-    <article class="content px-4">
-      @Body
-    </article>
-  </main>
-</div>
+
+<style>
+  .header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-right: 16px;
+  }
+  .header-spacer {
+    flex-grow: 1;
+  }
+</style>
 
 @code {
+  bool sidebarExpanded = true;
+
   private void OnClick()
   {
     Console.WriteLine("click");
   }
+
 }

@@ -16,6 +16,7 @@ builder.Services
     .AddDeckStatsClient()
     .ConfigureHttpClient(client => client.BaseAddress = new Uri("http://localhost:5274/graphql"));
 
+builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();

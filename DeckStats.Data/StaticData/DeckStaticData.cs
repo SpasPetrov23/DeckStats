@@ -1,3 +1,4 @@
+using DeckStats.Data.Enums;
 using DeckStats.Data.Models;
 
 namespace DeckStats.Data.StaticData;
@@ -37,8 +38,8 @@ public class DeckStaticData
                 Losses = rngLosses,
                 WinRatio = rngWins / totalGames,
                 Points = (rngWins - rngLosses) * 250 / totalGames,
-                Tier = "/",
-                SubjectiveTier = "/",
+                Tier = TierType.Unranked,
+                SubjectiveTier = TierType.Unranked,
                 ImageUrl = ""
             });
         }
